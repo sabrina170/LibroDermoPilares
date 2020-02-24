@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    <head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link type="text/css" href="main.css" rel="stylesheet" media="screen" />
+	</head>
+	<style>
+
+		body, h2, p {
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background-color:  lightgoldenrodyellow;
+	color: #333;
+	font-family: Helvetica, sans-serif;
+}
+
+#book {
+	background: url("book.png") no-repeat;
+	position: absolute;
+	width: 830px;
+	height: 260px;
+	left: 50%;
+	top: 50%;
+	margin-left: -400px;
+	margin-top: -125px;
+}
+
+#pages section {
+	background: url("paper.png") no-repeat;
+	display: block;
+	width: 400px;
+	height: 250px;
+	position: absolute;
+	left: 415px;
+	top: 5px;
+	overflow: hidden;
+}
+	#pages section>div {
+		display: block;
+		width: 400px;
+		height: 250px;
+		font-size: 12px;
+	}
+	#pages section p,
+	#pages section h2 {
+		padding: 3px 35px;
+		line-height: 1.4em;
+		text-align: justify;
+	}
+	#pages section h2{
+		margin: 15px 0 10px;
+	}
+
+#pageflip-canvas {
+	position: absolute;
+	z-index: 100;
+}
+
+		</style>
+	<body>
+		<h1>Demo Pilares</h1>
+		<div id="book">
+			<canvas id="pageflip-canvas"></canvas>
+			<div id="pages">
+				<section >
+					<div STYLE="position:absolute; top:10px; left:10px; visibility:visible z-index:1; ">
+						<h3 style="background-color:bisque;">Colorea la siguiente imagen usando los colores rojo y negro</h3>
+						<input  type="hidden" id="texto" value="Colorea la siguiente imagen usando los colores rojo y negro" >
+						<input style="background-color:darkgrey; border-radius: 10px;" type="submit"  onclick="decir()" value="🔊" />
+					</div>
+					<div>
+					<img  style="width: 400px; height: 260px;"  src="pagina1.jpg " />
+					</div>
+					<DIV STYLE="position:absolute; top:70px; left:220px; visibility:visible z-index:1">
+						<img id="caja" style="width: 150px;
+						height: 150px;"  src="papanoel.jpg " />
+
+						</div>
+					<DIV STYLE="position:absolute; top:70px; left:220px; visibility:visible z-index:1">
+                    <input type="hidden" value="Mostrar" onclick="Mostrar()"/>
+					<input type="hidden" value="Ocultar" onclick="Ocultar()"/>
+				</div>
+				</section>
+				<section>
+					<div>
+						<img style="width: 400px;
+						height: 260px;"  src="pagina2.jpg " />	</div>
+				</section>
+				<section>
+					<div>
+						<img style="width: 400px;
+						height: 260px;" src="pagina3.jpg " />	</div>
+				</section>
+				<section>
+					<div>
+						<img style="width: 400px;
+						height: 260px;" src="pagina4.png " />	</div>
+				</section>
+				<section>
+					<div>
+						<img style="width: 400px;
+						height: 260px;" src="pagina5.png" />	</div>
+				</section>
+				<section>
+					<div>
+						<img style="width: 400px;
+						height: 260px;"  src="pagina6.png" />	
+					</div>
+				</section>
+				<section>
+					<div>
+						<img style="width: 400px;
+						height: 260px;"  src="pagina1.jpg " />	</div>
+				</section>
+				<section>
+					<div>
+						<h2>Support</h2>
+						<p>The element is currently supported by the latest versions of Mozilla Firefox, Google Chrome, Safari, and Opera. It is not natively implemented by Internet Explorer (IE) as of version 8, though support is in development for Internet Explorer 9; however, many of the Canvas element's features can be supported in IE, for example by using Google or Mozilla plugins, JavaScript libraries and either Adobe Flash or IE's proprietary VML.</p>
+					</div>
+				</section>
+			</div>
+		</div>
+		<script src="//cdnjs.cloudflare.com/ajax/libs/annyang/2.6.1/annyang.min.js"></script>
+<script>
+if (annyang) {
+  var commands = {
+    'hola pilar': function() {
+         alert('HOLA SABRINA');
+          },
+   'sum' : mas,
+	'menos' : menos,
+	'leer' : decir,
+	'respuesta' : Mostrar,
+   'ocultar' : Ocultar,	
+  };
+  annyang.addCommands(commands);
+  annyang.setLanguage("es-MX");
+
+  annyang.start();
+}
+
+function decir(){
+    speechSynthesis.speak(new SpeechSynthesisUtterance(document.getElementById("texto").value));
+}
+
+function Mostrar() {
+        document.getElementById("caja").style.display = "block";
+    }
+
+function Ocultar() {
+        document.getElementById("caja").style.display = "none";
+    }
+
+ function Mostrar_Ocultar() {
+           var caja = document.getElementById("caja");
+           
+           if(caja.style.display == "none"){
+               Mostrar();
+               document.getElementById("boton").value = "Mostrar";
+           }
+           else{
+               Ocultar();
+               document.getElementById("boton").value = "Ocultar";
+
+           }
+    }
+
+ 
+var zoom=1;
+
+function mas() {
+        zoom+=.50;
+        resize();
+ }
+
+function menos(){
+    if(zoom>0.2) {
+        zoom-=.50;
+        resize();
+    }
+}
+ 
+function resize() {
+    document.getElementById("book").style.zoom=zoom;
+    document.getElementById("value").innerHTML="x"+zoom.toFixed(2);
+}
+
+function PaginaWebPilares() {
+    window.location.replace('http://www.proyectopilares.com.pe/');
+ }
+ function AulaInteligente() {
+   // window.location.replace('http://localhost/CopyPilares/cache/pilares/ACTCI1/index.html#p=46');
+   window.location.replace('AulaInteligente.php');
+ }
+
+ 
+
+</script>
+	
+		<script type="text/javascript" src="pageflip.js"></script>
+	</body>
+<html>
